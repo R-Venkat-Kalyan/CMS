@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Appointment Scheduling</title>
+	<style>
+		body {
+			font-family: 'Arial', sans-serif;
+			background-color: #f4f4f4;
+			margin: 0;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+		}
+
+		.container {
+			max-width: 400px;
+			background: #fff;
+			padding: 30px;
+			border-radius: 10px;
+			box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+		}
+
+		h2 {
+			text-align: center;
+			color: #3498db;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+		}
+
+		label {
+			margin-bottom: 8px;
+			color: #333;
+		}
+
+		input[type="text"],
+		input[type="email"],
+		input[type="date"],
+		select,
+		input[type="submit"] {
+			width: 100%;
+			padding: 12px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			font-size: 16px;
+		}
+
+		input[type="submit"] {
+			background-color: #3498db;
+			color: white;
+			cursor: pointer;
+			transition: background-color 0.3s ease;
+		}
+
+		input[type="submit"]:hover {
+			background-color: #2980b9;
+		}
+	</style>
+</head>
+
+<body onload="noBack();" onunload="">
+
+	<div class="container">
+		<h2>Appointment Scheduling</h2>
+		<form action="" onsubmit="return validateForm()" method="post" th:action="@{/addschedule}">
+			<label for="fname">Full Name</label>
+			<input type="text" id="fname" name="fullname" placeholder="Your full name.." required>
+
+			<label for="email">Email</label>
+			<input type="email" id="email" name="email" placeholder="Your email.." required>
+
+			<label for="appt">Preferred Date</label>
+			<input type="date" id="appt" name="appt" onchange="loadTimeSlots()" required>
+
+			<label for="time">Preferred Time</label>
+			<select id="time" name="time" required>
+				<option value="" disabled selected>Select a time slot</option>
+			</select>
+
+			<input type="submit" value="Submit">
+		</form>
+	</div>
+
+	<script>
+		function loadTimeSlots() {
+			const selectedDate = new Date(document.getElementById('appt').value);
+			const today = new Date();
+			const tomorrow = new Date();
+			tomorrow.setDate(today.getDate() + 1);
+
+			// Check if the selected date is from tomorrow onwards
+			if (selectedDate < tomorrow) {
+				alert('Please select a date from tomorrow onwards.');
+				document.getElementById('appt').value = '';
+				return;
+			}
+
+			const dayOfWeek = selectedDate.getDay();
+
+			// Disable Sundays
+			if (dayOfWeek === 0 || dayOfWeek === 6) {
+				alert('Sorry, Saturdays && Sundays are not available. Please choose another day.');
+				document.getElementById('appt').value = '';
+				return;
+			}
+
+			const timeSelect = document.getElementById('time');
+			timeSelect.innerHTML = ''; // Clear previous options
+
+			// Define time slots for each day
+			const timeSlots = {
+				1: ["9:30 AM - 10:30 AM"],
+				2: ["11:30 AM - 12:30 PM"],
+				3: ["1:30 PM - 2:30 PM"],
+				4: ["3:00 PM - 4:00 PM"],
+				5: ["4:15 PM - 5:15 PM"],
+				// Add more days and time slots as needed
+			};
+
+			// Populate time slots for the selected day
+			const slots = timeSlots[dayOfWeek] || [];
+			for (const slot of slots) {
+				const option = document.createElement('option');
+				option.text = slot;
+				timeSelect.add(option);
+			}
+		}
+
+		function validateForm() {
+			// You can add additional validation logic here if needed
+			return true;
+		}
+
+		function noBack() {
+			if (window.performance && window.performance.navigation.type === 2) {
+				// 2 is the value for TYPE_BACK_FORWARD navigation
+				//alert("You cannot navigate back to this page.");
+				window.location.replace("Error.html");
+			}
+		}
+
+		window.onload = function () {
+			noBack();
+		};
+
+	</script>
+
+</body>
+
+</html>

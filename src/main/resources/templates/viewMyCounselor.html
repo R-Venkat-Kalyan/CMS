@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.com">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Student Panel</title>
+	<!-- bootstrap CDN -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- font awesome -->
+	<script src="https://kit.fontawesome.com/31149d48b0.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<!-- bootstrap fonts -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		html,
+		body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+			background-size: 400% 400%;
+			animation: gradient 15s ease infinite;
+		}
+
+		#studentPanel {
+			margin-top: 50px;
+			/* Adjust this value based on your design */
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		@keyframes gradient {
+			0% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
+
+			100% {
+				background-position: 0% 50%;
+			}
+		}
+
+		/* student panel section css */
+		.studentPanelText.card {
+			width: 400px;
+			cursor: pointer;
+			background-color: #000;
+			border-radius: 10px;
+			padding: 20px;
+			text-align: center;
+			box-shadow: 0 4px 8px rgba(245, 15, 15, 0.1);
+		}
+
+		.studentPanelIcon {
+			font-size: 36px;
+			color: green
+		}
+
+		.card-title {
+			color: rgb(255, 255, 255);
+			margin-top: 15px;
+			font-size: 24px;
+		}
+
+		.card-content {
+			color: white;
+			margin-top: 20px;
+			font-size: 18px;
+		}
+	</style>
+	<script>
+
+		function noBack() {
+			if (window.performance && window.performance.navigation.type === 2) {
+				// 2 is the value for TYPE_BACK_FORWARD navigation
+				//alert("You cannot navigate back to this page.");
+				window.location.replace("Error.html");
+			}
+		}
+
+		window.onload = function () {
+			noBack();
+		};
+	</script>
+</head>
+
+<body onload="noBack();" onunload="">
+
+	<!--Navbar-->
+	<nav class="navbar navbar-dark bg-dark">
+		<a class="navbar-brand" href="/">
+			<img src="logo1.png" width="30" height="30" class="d-inline-block align-top" alt="">
+			CMS
+		</a>
+		<ul class="navbar-nav ml-auto">
+			<li class="nav-item">
+				<a href="/logout">
+					<button type="button" class="btn btn-outline-success">Log out</button>
+				</a>
+			</li>
+		</ul>
+	</nav>
+
+	<!-- student panel section-->
+	<section id="studentPanel">
+		<div class="card studentPanelText">
+			<div class="card-body">
+				<i class="fas studentPanelIcon fa-user"></i>
+				<h4 class="card-title mt-3 text-lg font-bold studentPanelIcon">Your Counselor Details:</h4>
+				<p class="card-content">Meet your counselor and get the support you need.</p>
+				<p class="card-content">Counselor Name: <span th:text="${mc.counselorName}"></span></p>
+				<p class="card-content">Counselor ID: <span th:text="${mc.counselorId}"></span></p>
+				<p class="card-content">Cabin Location: <span th:text="${mc.cabinId}"></span></p>
+				<p class="card-content">Contact: <span th:text="${mc.counselorPhone}"></span></p>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+		integrity="sha384-rR+H4C5L7PjpKggpZ5LTOvD6NptdBOfYjcuuL+2bsEMCVGz8tJsXQL2ZU1LsF9lF" crossorigin="anonymous">
+
+</head>
+
+<body class="min-h-screen flex items-center justify-center bg-gray-200 pt-16" onload="noBack();" onunload="">
+	<div class="w-full max-w-screen-sm p-8 bg-white rounded-md shadow-md">
+		<button type="button"
+			class="w-full flex justify-center items-center px-5 py-3 font-medium tracking-wide text-white capitalize bg-black rounded-md hover:bg-gray-900 focus:outline-none transition duration-300 transform active:scale-95 ease-in-out">
+			<span class="pl-2 mx-1">Edit Counsellor - Student Mapping</span>
+		</button>
+		<div class="mt-5 bg-white rounded-lg shadow">
+			<form method="post" th:action="@{/addMapping}" th:object="${map}">
+				<div class="flex">
+					<div class="flex-1 py-5 pl-5 overflow-hidden">
+						<i class="fas fa-user-tie text-2xl"></i>
+						<h1 class="inline text-2xl font-semibold leading-none">Counselor</h1>
+					</div>
+				</div>
+				<div class="px-5 pb-5">
+					<input type="text" name="counselorName" placeholder="Name" th:value="${map.counselorName}"
+						class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
+					<input type="number" name="counselorId" placeholder="Counselor ID" th:value="${map.counselorId}"
+						class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
+					<div class="flex">
+						<div class="flex-grow w-1/4 pr-2">
+							<input type="text" name="cabinId" placeholder="Cabin ID" th:value="${map.cabinId}"
+								class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
+						</div>
+						<div class="flex-grow">
+							<input type="tel" name="counselorPhone" placeholder="Phone" th:value="${map.counselorPhone}"
+								class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
+						</div>
+					</div>
+					<input type="text" name="telegramLink" placeholder="Telegram Channel Link"
+						th:value="${map.telegramLink}"
+						class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
+				</div>
+				<div class="flex">
+					<div class="flex-1 py-5 pl-5 overflow-hidden">
+						<i class="fas fa-user-graduate text-2xl"></i>
+						<h1 class="inline text-2xl font-semibold leading-none">Student</h1>
+					</div>
+					<div class="flex-none pt-2.5 pr-2.5 pl-1"></div>
+				</div>
+				<div class="px-5 pb-5">
+					<input type="text" name="studentName" placeholder="Name" th:value="${map.studentName}"
+						class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
+					<input type="number" name="studentId" placeholder="Student ID" th:value="${map.studentId}"
+						class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
+					<div class="flex">
+						<div class="flex-grow w-1/4 pr-2">
+							<input type="text" name="studentDepartment" placeholder="Department"
+								th:value="${map.studentDepartment}"
+								class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
+						</div>
+						<div class="flex-grow">
+							<input type="tel" name="studentPhone" placeholder="Phone" th:value="${map.studentPhone}"
+								class="text-black placeholder-gray-600 w-full px-4 py-2.5 mt-2 text-base transition duration-500 ease-in-out transform border-transparent rounded-lg bg-gray-200 focus:border-blueGray-500 focus:bg-white dark:focus:bg-gray-800 focus:outline-none focus:shadow-outline focus:ring-2 ring-offset-current ring-offset-2 ring-gray-400">
+						</div>
+					</div>
+				</div>
+				<hr class="mt-4">
+				<div class="flex flex-row-reverse p-3">
+					<div class="flex-initial pl-3">
+						<button type="submit" onclick="validateForm()"
+							class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-black rounded-md hover:bg-gray-800 focus:outline-none focus:bg-gray-900 transition duration-300 transform active:scale-95 ease-in-out">
+							<span class="pl-2 mx-1">Update</span>
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		function validateForm() {
+			// Get form fields
+			var counselorName = document.getElementById('counselorName').value;
+			var counselorId = document.getElementById('counselorId').value;
+			var cabinId = document.getElementById('cabinId').value;
+			var counselorPhone = document.getElementById('counselorPhone').value;
+			var telegramLink = document.getElementById('telegramLink').value;
+			var studentName = document.getElementById('studentName').value;
+			var studentId = document.getElementById('studentId').value;
+			var studentDepartment = document.getElementById('studentDepartment').value;
+			var studentPhone = document.getElementById('studentPhone').value;
+
+			// Check if any field is empty
+			if (
+				counselorName === '' ||
+				counselorId === '' ||
+				cabinId === '' ||
+				counselorPhone === '' ||
+				telegramLink === '' ||
+				studentName === '' ||
+				studentId === '' ||
+				studentDepartment === '' ||
+				studentPhone === ''
+			) {
+				alert('Please fill in all fields before saving. ');
+			} else {
+				// Check counselor ID length
+				if (counselorId.length !== 4) {
+					alert('Counselor ID should be exactly four digits.');
+					return;
+				}
+
+				// Check student ID length
+				if (studentId.length !== 10) {
+					alert('Student ID should be exactly 10 digits.');
+					return;
+				}
+
+				// alert('Saved Successfully. 👍');
+				// You can submit the form or perform other actions here
+			}
+		}
+
+		function noBack() {
+			if (window.performance && window.performance.navigation.type === 2) {
+				// 2 is the value for TYPE_BACK_FORWARD navigation
+				//alert("You cannot navigate back to this page.");
+				window.location.replace("Error.html");
+			}
+		}
+
+		window.onload = function () {
+			noBack();
+		};
+
+	</script>
+
+</body>
+
+</html>
