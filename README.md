@@ -18,7 +18,7 @@ The Counseling Management System is a web application built with Java Spring Boo
 
 ### Frontend Only
 
-The frontend of the Counseling Management System is permanently accessible at: https://vercel.com/r-venkat-kalyan/cms-front-end
+The frontend of the Counseling Management System is permanently accessible at: https://cms-front-end-pearl.vercel.app/
 
 ### Complete Deployed Application
 
