@@ -22,7 +22,6 @@ The frontend of the Counseling Management System is permanently accessible at: h
 
 ### Complete Deployed Application
 
-The complete deployed application, including the backend and frontend, is accessible at: https://still-mongoose-typically.ngrok-free.app/
-Please note that the availability of this URL may vary.
+The complete deployed application, including the backend and frontend, is accessible at: https://cms-mongodb.onrender.com/
 
 
